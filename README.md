@@ -7,9 +7,10 @@ Kybernetický polygon pro výukové účely
 Vytvořit platformu "Kybernetický polygon pro výukové účely", postavenou na virtualizačním prostředí **Proxmox**, pro praktickou výuku v oblasti správy IT žáků naší školy.
 
 Tato platforma umožní žákům zejména:
-• **Reálně spravovat servery a koncové prvky**: Studenti získají praktické zkušenosti s instalací, konfigurací a správou serverů a klientských stanic v bezpečném realistickém prostředí.
-• **Konfigurovat síťové služby**: Naučí se nastavovat a spravovat síťové služby jako DHCP, DNS, firewall a VPN, čímž získají hlubší pochopení fungování počítačových sítí.
-• **Řešit kybernetickou bezpečnost laboratorních infrastruktur**:
+
+- **Reálně spravovat servery a koncové prvky**: Studenti získají praktické zkušenosti s instalací, konfigurací a správou serverů a klientských stanic v bezpečném realistickém prostředí.
+- **Konfigurovat síťové služby**: Naučí se nastavovat a spravovat síťové služby jako DHCP, DNS, firewall a VPN, čímž získají hlubší pochopení fungování počítačových sítí.
+- **Řešit kybernetickou bezpečnost laboratorních infrastruktur**:
     - **Implementace bezpečnostních opatření a politiky**: Budou konfigurovat firewally, nastavovat bezpečnostní politiky, implementovat antivirová řešení a další ochranné mechanismy.
     - **Analýza zranitelností**: Naučí se identifikovat a analyzovat zranitelnosti systémů a aplikací a následně navrhovat opatření k jejich odstranění.
     - **Zálohování a obnova dat**: Osvojí si principy zálohování a obnovy dat a naučí se chránit systémy před ztrátou dat v důsledku útoků nebo selhání hardwaru.
