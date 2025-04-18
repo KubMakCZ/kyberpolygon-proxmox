@@ -11,28 +11,21 @@
 
 - musí mít 2 uložiště
   - pro Disk images
-  - ZFS pro HA
+  - Ceph pro HA
 - HA
-- Clusters
+- Cluster
 - při VM proxmoxu použít `--cpu host`
+- v datacenter v options -> HA options na **shutdown-policy=MIGRATE**
+  - pak máme možnosti při vypnutí proxmox node (třeba kvůli aktualizacím) tak přesunout virtuálku na jiný node a tím "nezabít" VM
 
 ### NAS
 
-- TrueNAS
+- TrueNAS nebo OpenMediaVault
 - jaky share? SMB nebo NFS
   - nfs potřebuje opravnění a manualní nastavení protože proxmox používá root 
+- NAS na uložiště ISO a CT kontejnerů 
 
 
 ### sítové prvky
 
-- jake prvky?
-  - routery
-  - switche
-  - AP
-  - firewally
-  - NVR?
-- jake značky
-  - UNIFI
-  - turris
-  - microtik
-  - cisco
+-  Ubiquiti UniFi Switch Enterprise XG 24 
