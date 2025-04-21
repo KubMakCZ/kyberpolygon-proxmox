@@ -29,3 +29,12 @@
 ### sítové prvky
 
 -  Ubiquiti UniFi Switch Enterprise XG 24 
+-  
+
+
+km5.odbornaskola.cz:5978
+192.168.1.143
+Project ID
+68026040001fb73840da
+API Endpoint
+http://192.168.1.143/v1
