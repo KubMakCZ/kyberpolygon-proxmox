@@ -8,7 +8,7 @@ npx expo install react-native-appwrite react-native-url-polyfill
 ```
 
 inizialize
-```reactnative
+```js
 import { Client, Account, ID } from 'react-native-appwrite';
 
 const client = new Client()
