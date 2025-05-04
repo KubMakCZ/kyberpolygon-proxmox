@@ -1,0 +1,22 @@
+---
+all: # Volitelná hlavní skupina
+  children: # Definice podskupin
+    proxmox_nodes: # Název tvé skupiny pro Proxmox nody
+      hosts: # Seznam hostů ve skupině
+        pve1.local: # DNS jméno nebo alias prvního nodu
+          ansible_host: 192.168.1.X # Jeho IP adresa
+        pve2.local:
+          ansible_host: 192.168.1.X
+        pve3.local:
+          ansible_host: 192.168.1.X
+        pve4.local:
+          ansible_host: 192.168.1.X
+        # Až přidáš další node (pve5), přidáš ho sem...
+        # pve5.local:
+        #   ansible_host: 192.168.1.15
+      vars: # Proměnné platné pro všechny hosty v této skupině
+        ansible_user: root # Připojovat se jako root (nebo jiný uživatel s sudo)
+        # Pokud používáš SSH klíč:
+        # ansible_ssh_private_key_file: /cesta/k/tvemu/ssh/klici/id_rsa
+        # Pokud se připojuješ heslem (méně bezpečné):
+        # ansible_ssh_pass: 'tvoje_heslo'

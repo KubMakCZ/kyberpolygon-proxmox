@@ -1,0 +1,18 @@
+--- # Označuje začátek YAML dokumentu (volitelné, ale dobrá praxe)
+- name: Můj První Playbook # Název celé "hry" (play) v playbooku
+  hosts: student_vms      # Na které hosty nebo skupiny z inventáře se má play aplikovat
+  gather_facts: yes       # Chceme, aby Ansible zjistil informace (fakta) o cílových strojích? (Ano)
+  become: no              # Potřebujeme provádět úlohy pod rootem (přes sudo)? (Pro tento test ne)
+
+  tasks: # Seznam úkolů, které se mají provést
+    - name: Otestovat připojení (Ping) # Popis prvního úkolu
+      ansible.builtin.ping: # Použít modul 'ping' (ověří připojení a schopnost Ansible spustit kód na cíli)
+          data: pong          # Volitelný parametr, pošle 'pong' a očekává 'pong' zpět
+
+    - name: Zobrazit hostname cílového stroje # Popis druhého úkolu
+      ansible.builtin.debug: # Použít modul 'debug' pro výpis informací
+        msg: "Hostname tohoto stroje je: {{ ansible_facts['hostname'] }}" # Vypsat zprávu obsahující fakt 'hostname'
+
+    - name: Zobrazit distribuci OS
+      ansible.builtin.debug:
+        msg: "Distribuce OS: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}"

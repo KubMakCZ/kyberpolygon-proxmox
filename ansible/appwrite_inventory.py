@@ -12,7 +12,6 @@ from dotenv import load_dotenv
 # Načti proměnné z .env souboru do prostředí os.environ
 load_dotenv() # <--- Zavolat tuto funkci zde
 
-
 # --- Konfigurace ---
 # Čtení z proměnných prostředí (nyní mohou pocházet z .env)
 APPWRITE_ENDPOINT = os.environ.get('APPWRITE_ENDPOINT')
@@ -37,6 +36,7 @@ def get_appwrite_client():
     client.set_endpoint(APPWRITE_ENDPOINT)
     client.set_project(APPWRITE_PROJECT_ID)
     client.set_key(APPWRITE_API_KEY)
+    client.set_self_signed(status=True)
     return client
 
 def get_active_vms(databases):

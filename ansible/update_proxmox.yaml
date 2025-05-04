@@ -1,0 +1,34 @@
+---
+- name: Aktualizovat Proxmox VE Nody
+  hosts: proxmox_nodes # Cílíme na skupinu definovanou v inventáři
+  become: yes          # Úlohy vyžadují práva roota (apt)
+  serial: 1            # !!! VELMI DŮLEŽITÉ pro cluster !!!
+                       # Zpracuje vždy jen JEDEN node z skupiny najednou.
+                       # Další node začne až po úspěšném dokončení předchozího.
+
+  tasks:
+    - name: Aktualizovat APT cache (apt update)
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 3600 # Jak dlouho považovat cache za platnou (sekundy)
+
+    - name: Provést plný upgrade systému (apt dist-upgrade)
+      ansible.builtin.apt:
+        upgrade: dist # 'dist' je důležité pro Proxmox, řeší závislosti lépe než 'yes'
+        autoremove: yes # Odstranit nepotřebné balíčky
+
+    # --- Volitelná sekce pro restart ---
+    - name: Zkontrolovat, zda je vyžadován restart
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: reboot_required_file # Uloží výsledek (informace o souboru) do proměnné
+
+    - name: Restartovat node, pokud je potřeba
+      ansible.builtin.reboot:
+        msg: "Restart spuštěn Ansiblem kvůli aktualizacím"
+        connect_timeout: 5
+        reboot_timeout: 600 # Jak dlouho čekat na restart (sekundy)
+        pre_reboot_delay: 0
+        post_reboot_delay: 30 # Pauza po restartu
+        test_command: uptime
+      when: reboot_required_file.stat.exists # Spustit restart jen pokud soubor /var/run/reboot-required existuje
