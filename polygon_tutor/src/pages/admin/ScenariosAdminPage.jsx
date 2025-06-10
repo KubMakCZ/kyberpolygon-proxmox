@@ -1,16 +1,12 @@
-// SOUBOR: Vytvořte nový soubor src/pages/admin/ScenariosAdminPage.jsx
-// --------------------------------------------------------------------
-// Tato komponenta slouží k vytváření a správě výukových scénářů
-// kombinací existujících návodů a virtuálních strojů.
+// SOUBOR: src/pages/admin/ScenariosAdminPage.jsx
+// ----------------------------------------------------
+// UPRAVENÁ VERZE: Využívá centrální konfigurační soubor.
 
 import React, { useState, useEffect } from 'react';
-import { databases, ID, Query } from '../../appwriteConfig';
 
-// DŮLEŽITÉ: Nahraďte je vašimi skutečnými hodnotami z Appwrite konzole!
-const DATABASE_ID = 'ID_VAŠÍ_DATABÁZE';
-const SCENARIOS_COLLECTION_ID = 'scenarios';
-const MANUALS_COLLECTION_ID = 'manuals';
-const VMS_COLLECTION_ID = 'virtual_machines';
+// Importujeme naši centrální konfiguraci a služby Appwrite
+import { AppwriteConfig } from '../../config';
+import { databases, ID, Query } from '../../appwriteConfig';
 
 const ScenariosAdminPage = () => {
     // Seznamy dat z databáze
@@ -33,9 +29,9 @@ const ScenariosAdminPage = () => {
         setIsLoading(true);
         try {
             const [scenariosResponse, manualsResponse, vmsResponse] = await Promise.all([
-                databases.listDocuments(DATABASE_ID, SCENARIOS_COLLECTION_ID, [Query.orderDesc('$createdAt')]),
-                databases.listDocuments(DATABASE_ID, MANUALS_COLLECTION_ID, [Query.limit(100)]),
-                databases.listDocuments(DATABASE_ID, VMS_COLLECTION_ID, [Query.limit(100)])
+                databases.listDocuments(AppwriteConfig.DATABASE_ID, AppwriteConfig.SCENARIOS_COLLECTION_ID, [Query.orderDesc('$createdAt')]),
+                databases.listDocuments(AppwriteConfig.DATABASE_ID, AppwriteConfig.MANUALS_COLLECTION_ID, [Query.limit(100)]),
+                databases.listDocuments(AppwriteConfig.DATABASE_ID, AppwriteConfig.VMS_COLLECTION_ID, [Query.limit(100)])
             ]);
             setScenarios(scenariosResponse.documents);
             setManuals(manualsResponse.documents);
@@ -62,24 +58,23 @@ const ScenariosAdminPage = () => {
 
         try {
             await databases.createDocument(
-                DATABASE_ID,
-                SCENARIOS_COLLECTION_ID,
+                AppwriteConfig.DATABASE_ID,
+                AppwriteConfig.SCENARIOS_COLLECTION_ID,
                 ID.unique(),
                 {
                     name: newScenarioName,
                     description: newScenarioDesc,
                     manualId: selectedManualId,
-                    requiredVmIds: selectedVmIds // Uložíme pole IDček
+                    requiredVmIds: selectedVmIds
                 }
             );
 
             alert('Scénář byl úspěšně vytvořen!');
-            // Reset formuláře
             setNewScenarioName('');
             setNewScenarioDesc('');
             setSelectedManualId('');
             setSelectedVmIds([]);
-            fetchAllData(); // Obnovíme seznam scénářů
+            fetchAllData();
 
         } catch (error) {
             console.error("Chyba při vytváření scénáře:", error);

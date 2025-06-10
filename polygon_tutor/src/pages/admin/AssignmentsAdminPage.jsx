@@ -1,14 +1,13 @@
-// SOUBOR 1: Vytvořte nový soubor src/pages/admin/AssignmentsAdminPage.jsx
+// SOUBOR: src/pages/admin/AssignmentsAdminPage.jsx
 // -------------------------------------------------------------------------
-// Tato komponenta slouží k přiřazování scénářů uživatelům.
+// Finální verze, která volá naši funkční serverovou funkci 'getStudents'
+// a správně zpracovává její JSON odpověď.
 
 import React, { useState, useEffect } from 'react';
-import { databases, teams, ID, Query } from '../../appwriteConfig';
 
-// DŮLEŽITÉ: Nahraďte je vašimi skutečnými hodnotami!
-const DATABASE_ID = 'ID_VAŠÍ_DATABÁZE';
-const SCENARIOS_COLLECTION_ID = 'scenarios';
-const ASSIGNMENTS_COLLECTION_ID = 'assignments';
+// Importujeme naši centrální konfiguraci a potřebné služby Appwrite
+import { AppwriteConfig } from '../../config';
+import { databases, functions, ID, Query } from '../../appwriteConfig';
 
 const AssignmentsAdminPage = () => {
     const [users, setUsers] = useState([]);
@@ -16,31 +15,49 @@ const AssignmentsAdminPage = () => {
     const [assignments, setAssignments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Stavy pro formulář
     const [selectedUserId, setSelectedUserId] = useState('');
     const [selectedScenarioId, setSelectedScenarioId] = useState('');
 
     useEffect(() => {
-        // Načteme všechny potřebné data najednou
         fetchAllData();
     }, []);
 
     const fetchAllData = async () => {
         setIsLoading(true);
         try {
-            // Promise.all umožňuje spustit více asynchronních operací najednou
-            const [usersResponse, scenariosResponse, assignmentsResponse] = await Promise.all([
-                teams.listMemberships('ID_TÝMU_STUDENTS'), // Načteme jen členy týmu 'Students'
-                databases.listDocuments(DATABASE_ID, SCENARIOS_COLLECTION_ID, [Query.limit(100)]),
-                databases.listDocuments(DATABASE_ID, ASSIGNMENTS_COLLECTION_ID, [Query.limit(100), Query.orderDesc('$createdAt')])
+            const [usersFunctionResponse, scenariosResponse, assignmentsResponse] = await Promise.all([
+                // 1. Zavoláme naši serverovou funkci podle jejího ID z configu
+                functions.createExecution(AppwriteConfig.GET_STUDENTS_FUNCTION_ID),
+                
+                // Tyto části zůstávají stejné
+                databases.listDocuments(AppwriteConfig.DATABASE_ID, AppwriteConfig.SCENARIOS_COLLECTION_ID, [Query.limit(100)]),
+                databases.listDocuments(AppwriteConfig.DATABASE_ID, AppwriteConfig.ASSIGNMENTS_COLLECTION_ID, [Query.limit(100), Query.orderDesc('$createdAt')])
             ]);
-            setUsers(usersResponse.memberships);
+
+            // 2. OPRAVA: Nejdříve zkontrolujeme, zda spuštění funkce neselhalo
+            if (usersFunctionResponse.status === 'failed') {
+                throw new Error(`Provedení serverové funkce selhalo: ${usersFunctionResponse.errors}`);
+            }
+
+            // 3. OPRAVA: Zpracováváme odpověď z vlastnosti 'responseBody', ne 'response'
+            // Odpověď je text (string), musíme ji převést na JSON objekt
+            const usersResult = JSON.parse(usersFunctionResponse.responseBody);
+            
+            // 4. Zkontrolujeme, zda operace UVNITŘ funkce byla úspěšná
+            if (!usersResult.success) {
+                // Pokud ne, vyvoláme chybu se zprávou z funkce
+                throw new Error(usersResult.message || 'Načtení studentů přes funkci selhalo.');
+            }
+            
+            // 5. Pokud vše proběhlo v pořádku, uložíme data do stavu
+            // Data jsou nyní uvnitř objektu, který vrací naše funkce
+            setUsers(usersResult.data.memberships); 
             setScenarios(scenariosResponse.documents);
             setAssignments(assignmentsResponse.documents);
 
         } catch (error) {
-            console.error("Chyba při načítání dat:", error);
-            alert('Nepodařilo se načíst data pro přiřazování.');
+            console.error("Chyba při načítání dat pro přiřazení:", error);
+            alert('Nepodařilo se načíst data. Zkontrolujte konzoli pro detaily.');
         }
         setIsLoading(false);
     };
@@ -54,8 +71,8 @@ const AssignmentsAdminPage = () => {
 
         try {
             await databases.createDocument(
-                DATABASE_ID,
-                ASSIGNMENTS_COLLECTION_ID,
+                AppwriteConfig.DATABASE_ID,
+                AppwriteConfig.ASSIGNMENTS_COLLECTION_ID,
                 ID.unique(),
                 {
                     userId: selectedUserId,
@@ -65,7 +82,7 @@ const AssignmentsAdminPage = () => {
                 }
             );
             alert('Scénář byl úspěšně přiřazen!');
-            fetchAllData(); // Obnovíme seznam přiřazení
+            fetchAllData();
 
         } catch (error) {
             console.error("Chyba při přiřazování scénáře:", error);
@@ -80,7 +97,8 @@ const AssignmentsAdminPage = () => {
     return (
         <div>
             <h3>Přiřazení Scénářů</h3>
-
+            
+            {/* Formulář a tabulka zůstávají beze změny */}
             <section style={{ marginBottom: '2em', padding: '1em', border: '1px solid #ccc' }}>
                 <h4>Přiřadit nový scénář</h4>
                 <form onSubmit={handleAssignScenario}>
@@ -88,8 +106,8 @@ const AssignmentsAdminPage = () => {
                         <label>Vyberte studenta: </label>
                         <select value={selectedUserId} onChange={(e) => setSelectedUserId(e.target.value)} required>
                             <option value="">-- Student --</option>
-                            {users.map(user => (
-                                <option key={user.userId} value={user.userId}>{user.userName} ({user.userEmail})</option>
+                            {users.map(userMembership => (
+                                <option key={userMembership.userId} value={userMembership.userId}>{userMembership.userName} ({userMembership.userEmail})</option>
                             ))}
                         </select>
                     </div>
@@ -119,13 +137,12 @@ const AssignmentsAdminPage = () => {
                     </thead>
                     <tbody>
                         {assignments.map(assignment => {
-                            // Najdeme jména podle ID pro lepší zobrazení
                             const user = users.find(u => u.userId === assignment.userId);
                             const scenario = scenarios.find(s => s.$id === assignment.scenarioId);
                             return (
                                 <tr key={assignment.$id}>
-                                    <td>{user ? user.userName : assignment.userId}</td>
-                                    <td>{scenario ? scenario.name : assignment.scenarioId}</td>
+                                    <td>{user ? user.userName : `Neznámý uživatel (${assignment.userId})`}</td>
+                                    <td>{scenario ? scenario.name : `Neznámý scénář (${assignment.scenarioId})`}</td>
                                     <td>{new Date(assignment.assigned_at).toLocaleString()}</td>
                                     <td>{assignment.status}</td>
                                 </tr>

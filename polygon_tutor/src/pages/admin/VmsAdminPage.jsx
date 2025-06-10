@@ -1,19 +1,18 @@
-// SOUBOR 1: Vytvořte nový soubor src/pages/admin/VmsAdminPage.jsx
-// ---------------------------------------------------------------
-// Tato komponenta bude sloužit pro správu záznamů o virtuálních strojích.
+// SOUBOR: src/pages/admin/VmsAdminPage.jsx
+// ----------------------------------------------------
+// UPRAVENÁ VERZE: Využívá centrální konfigurační soubor.
 
 import React, { useState, useEffect } from 'react';
-import { databases, ID, Query } from '../../appwriteConfig';
 
-// IDčka z vaší Appwrite konzole. DŮLEŽITÉ: Nahraďte je vašimi skutečnými hodnotami!
-const DATABASE_ID = '6848263c000947667998';
-const VMS_COLLECTION_ID = 'virtual_machines';
+// Importujeme naši centrální konfiguraci a služby Appwrite
+import { AppwriteConfig } from '../../config';
+import { databases, ID, Query } from '../../appwriteConfig';
 
 const VmsAdminPage = () => {
     const [vms, setVms] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
-    // Stavy pro formulář pro vytvoření nového záznamu o VM
+    // Stavy pro formulář
     const [newVmName, setNewVmName] = useState('');
     const [newVmDescription, setNewVmDescription] = useState('');
     const [newVmId, setNewVmId] = useState('');
@@ -26,8 +25,8 @@ const VmsAdminPage = () => {
         setIsLoading(true);
         try {
             const response = await databases.listDocuments(
-                DATABASE_ID,
-                VMS_COLLECTION_ID,
+                AppwriteConfig.DATABASE_ID,
+                AppwriteConfig.VMS_COLLECTION_ID,
                 [Query.orderDesc('$createdAt')]
             );
             setVms(response.documents);
@@ -47,14 +46,14 @@ const VmsAdminPage = () => {
 
         try {
             await databases.createDocument(
-                DATABASE_ID,
-                VMS_COLLECTION_ID,
+                AppwriteConfig.DATABASE_ID,
+                AppwriteConfig.VMS_COLLECTION_ID,
                 ID.unique(),
                 {
                     name: newVmName,
                     description: newVmDescription,
-                    proxmox_vmid: parseInt(newVmId, 10), // Převedeme na číslo
-                    status: 'available', // Výchozí status
+                    proxmox_vmid: parseInt(newVmId, 10),
+                    status: 'available',
                 }
             );
 

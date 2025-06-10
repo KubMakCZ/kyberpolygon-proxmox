@@ -16,5 +16,8 @@ export const AppwriteConfig = {
 
     // ID Týmů
     STUDENTS_TEAM_ID: "684826260034027ad4fb",
-    ADMINS_TEAM_ID: "6848262e0011ff04d85f"
+    ADMINS_TEAM_ID: "6848262e0011ff04d85f",
+
+     // ID Funkcí <-- PŘIDEJTE TUTO SEKCI NEBO ŘÁDEK
+     GET_STUDENTS_FUNCTION_ID: "684887a300148186a1a6" 
 };
