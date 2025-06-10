@@ -1,4 +1,7 @@
-// src/App.jsx
+// SOUBOR 2: Aktualizujte soubor src/App.jsx
+// ----------------------------------------------------
+// Přidáme novou routu pro naši admin stránku se správou návodů.
+
 import { Routes, Route } from 'react-router-dom';
 // Importy ostatních stránek...
 import LoginPage from './pages/LoginPage';
@@ -10,8 +13,7 @@ import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
-// Později přidáme další admin stránky
-// import ManualsAdminPage from './pages/admin/ManualsAdminPage';
+import ManualsAdminPage from './pages/admin/ManualsAdminPage'; // <-- TENTO ŘÁDEK PŘIDEJTE
 
 function App() {
   return (
@@ -21,7 +23,7 @@ function App() {
         {/* Veřejné routy */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-
+        
         {/* Chráněná routa pro přihlášené uživatele (studenty i adminy) */}
         <Route 
           path="/" 
@@ -43,8 +45,8 @@ function App() {
         >
           {/* Vnořené routy admin sekce */}
           <Route index element={<AdminDashboard />} />
-          {/* <Route path="manuals" element={<ManualsAdminPage />} /> */}
-          {/* Zde přidáme další podstránky */}
+          <Route path="manuals" element={<ManualsAdminPage />} /> {/* <-- TENTO ŘÁDEK PŘIDEJTE */}
+          {/* Zde přidáme další podstránky, např. path="vms" */}
         </Route>
 
       </Routes>
