@@ -1,30 +1,43 @@
-// SOUBOR 2: Aktualizujte soubor src/App.jsx
+// SOUBOR: src/App.jsx
 // ----------------------------------------------------
-// Přidáme novou routu pro naši admin stránku se správou návodů.
+// Toto je hlavní komponenta aplikace, která definuje všechny cesty (routy)
+// a stará se o zobrazení správných stránek na základě URL adresy.
 
 import { Routes, Route } from 'react-router-dom';
-// Importy ostatních stránek...
+
+// Importy komponent pro veřejné stránky
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+
+// Importy komponent pro chráněné (privátní) stránky
 import DashboardPage from './pages/DashboardPage';
 import PrivateRoute from './components/PrivateRoute';
-
-// Nové importy pro admin sekci
 import AdminRoute from './components/AdminRoute';
+
+// Importy komponent pro administrátorskou sekci
 import AdminLayout from './pages/admin/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
-import ManualsAdminPage from './pages/admin/ManualsAdminPage'; // <-- TENTO ŘÁDEK PŘIDEJTE
+import ManualsAdminPage from './pages/admin/ManualsAdminPage';
+import VmsAdminPage from './pages/admin/VmsAdminPage';
+import ScenariosAdminPage from './pages/admin/ScenariosAdminPage';
+import AssignmentsAdminPage from './pages/admin/AssignmentsAdminPage';
 
 function App() {
   return (
     <div>
+      {/* Hlavní nadpis aplikace, který bude vidět na všech stránkách */}
       <h1>Kybernetický Polygon</h1>
+      
+      {/* Definice všech dostupných cest v aplikaci */}
       <Routes>
-        {/* Veřejné routy */}
+        {/* === VEŘEJNÉ ROUTY === */}
+        {/* Tyto stránky jsou dostupné komukoliv, i nepřihlášeným uživatelům. */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         
-        {/* Chráněná routa pro přihlášené uživatele (studenty i adminy) */}
+        {/* === CHRÁNĚNÁ ROUTA PRO VŠECHNY PŘIHLÁŠENÉ === */}
+        {/* Domovská stránka (dashboard) je obalená v PrivateRoute. */}
+        {/* To znamená, že se na ni dostane jen přihlášený uživatel. */}
         <Route 
           path="/" 
           element={
@@ -34,7 +47,9 @@ function App() {
           } 
         />
 
-        {/* Chráněná sekce POUZE pro adminy */}
+        {/* === CHRÁNĚNÁ SEKCE POUZE PRO ADMINY === */}
+        {/* Celá sekce /admin je obalená v AdminRoute, která kontroluje, */}
+        {/* zda má uživatel roli 'admin'. Všechny vnořené routy dědí tuto ochranu. */}
         <Route 
           path="/admin"
           element={
@@ -43,10 +58,12 @@ function App() {
             </AdminRoute>
           }
         >
-          {/* Vnořené routy admin sekce */}
-          <Route index element={<AdminDashboard />} />
-          <Route path="manuals" element={<ManualsAdminPage />} /> {/* <-- TENTO ŘÁDEK PŘIDEJTE */}
-          {/* Zde přidáme další podstránky, např. path="vms" */}
+          {/* Vnořené routy admin sekce, které se zobrazují uvnitř AdminLayout */}
+          <Route index element={<AdminDashboard />} /> {/* Úvodní stránka adminu na /admin */}
+          <Route path="manuals" element={<ManualsAdminPage />} /> {/* Stránka na /admin/manuals */}
+          <Route path="vms" element={<VmsAdminPage />} /> {/* Stránka na /admin/vms */}
+          <Route path="scenarios" element={<ScenariosAdminPage />} /> {/* Stránka na /admin/scenarios */}
+          <Route path="assignments" element={<AssignmentsAdminPage />} /> {/* Stránka na /admin/assignments */}
         </Route>
 
       </Routes>

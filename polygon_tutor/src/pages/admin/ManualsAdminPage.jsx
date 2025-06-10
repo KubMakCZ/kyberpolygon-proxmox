@@ -6,9 +6,9 @@ import React, { useState, useEffect } from 'react';
 import { databases, storage, ID, Query } from '../../appwriteConfig'; // Importujeme vše potřebné
 
 // IDčka z vaší Appwrite konzole. DŮLEŽITÉ: Nahraďte je vašimi skutečnými hodnotami!
-const DATABASE_ID = 'ID_VAŠÍ_DATABÁZE'; // Např. 'hlavni-databaze'
-const MANUALS_COLLECTION_ID = 'manuals';
-const MANUALS_BUCKET_ID = 'navody-markdown';
+const DATABASE_ID = '6848263c000947667998'; // Např. 'hlavni-databaze'
+const MANUALS_COLLECTION_ID = '684826720003c569ee5c';
+const MANUALS_BUCKET_ID = '6848264a0012ede9eaab';
 
 const ManualsAdminPage = () => {
     const [manuals, setManuals] = useState([]);
