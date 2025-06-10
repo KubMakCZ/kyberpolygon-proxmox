@@ -1,6 +1,7 @@
-// SOUBOR 3: Nahraďte obsah souboru -> src/pages/admin/ManualsAdminPage.jsx
+// SOUBOR: src/pages/admin/ManualsAdminPage.jsx
 // -------------------------------------------------------------------------
-// Toto je kompletní, opravená verze, která při nahrávání souboru nastavuje správná oprávnění.
+// FINÁLNÍ VERZE: Odstranili jsme diagnostické výpisy. Tento kód by měl
+// s opraveným config.js souborem již fungovat správně.
 
 import React, { useState, useEffect } from 'react';
 
@@ -43,23 +44,20 @@ const ManualsAdminPage = () => {
             return;
         }
 
-        // OPRAVA ZDE: Připravíme si pole oprávnění pro nový soubor
+        // Připravíme si pole oprávnění pro nový soubor.
         const filePermissions = [
-            // Dáme oprávnění ke čtení celému týmu studentů
             Permission.read(Role.team(AppwriteConfig.STUDENTS_TEAM_ID)),
-            // Dáme plná oprávnění celému týmu adminů
             Permission.read(Role.team(AppwriteConfig.ADMINS_TEAM_ID)),
             Permission.update(Role.team(AppwriteConfig.ADMINS_TEAM_ID)),
             Permission.delete(Role.team(AppwriteConfig.ADMINS_TEAM_ID)),
         ];
 
         try {
-            // Při nahrávání souboru předáme i pole oprávnění
             const fileResponse = await storage.createFile(
                 AppwriteConfig.MANUALS_BUCKET_ID,
                 ID.unique(),
                 newManualFile,
-                filePermissions // <-- Předáváme oprávnění zde
+                filePermissions
             );
             const fileId = fileResponse.$id;
 
@@ -74,7 +72,7 @@ const ManualsAdminPage = () => {
                 }
             );
 
-            alert('Návod byl úspěšně vytvořen!');
+            alert('Návod byl úspěšně vytvořen se správnými oprávněními!');
             setNewManualTitle('');
             setNewManualDescription('');
             setNewManualFile(null);
@@ -83,7 +81,7 @@ const ManualsAdminPage = () => {
 
         } catch (error) {
             console.error("Chyba při vytváření návodu:", error);
-            alert('Vytvoření návodu se nezdařilo.');
+            alert(`Vytvoření návodu se nezdařilo: ${error.message}`);
         }
     };
 
@@ -93,17 +91,45 @@ const ManualsAdminPage = () => {
             <section style={{ marginBottom: '2em', padding: '1em', border: '1px solid #ccc' }}>
                 <h4>Vytvořit nový návod</h4>
                 <form onSubmit={handleCreateManual}>
-                    {/* Formulář zůstává stejný */}
-                    <div><label>Název návodu: </label><input type="text" value={newManualTitle} onChange={(e) => setNewManualTitle(e.target.value)} required /></div>
-                    <div style={{ marginTop: '0.5em' }}><label>Popis: </label><textarea value={newManualDescription} onChange={(e) => setNewManualDescription(e.target.value)} /></div>
-                    <div style={{ marginTop: '0.5em' }}><label>Markdown soubor (.md): </label><input type="file" accept=".md" onChange={(e) => setNewManualFile(e.target.files[0])} required /></div>
+                    <div>
+                        <label>Název návodu: </label>
+                        <input type="text" value={newManualTitle} onChange={(e) => setNewManualTitle(e.target.value)} required />
+                    </div>
+                    <div style={{ marginTop: '0.5em' }}>
+                        <label>Popis: </label>
+                        <textarea value={newManualDescription} onChange={(e) => setNewManualDescription(e.target.value)} />
+                    </div>
+                    <div style={{ marginTop: '0.5em' }}>
+                        <label>Markdown soubor (.md): </label>
+                        <input type="file" accept=".md" onChange={(e) => setNewManualFile(e.target.files[0])} required />
+                    </div>
                     <button type="submit" style={{ marginTop: '1em' }}>Vytvořit</button>
                 </form>
             </section>
             <section>
                 <h4>Seznam existujících návodů</h4>
-                {/* Tabulka zůstává stejná */}
-                {isLoading ? (<p>Načítám...</p>) : (<table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}><thead><tr><th>Název</th><th>Popis</th><th>Datum vytvoření</th><th>ID souboru</th></tr></thead><tbody>{manuals.map(manual => (<tr key={manual.$id}><td>{manual.title}</td><td>{manual.description}</td><td>{new Date(manual.$createdAt).toLocaleString()}</td><td>{manual.markdownFileId}</td></tr>))}</tbody></table>)}
+                {isLoading ? (<p>Načítám...</p>) : (
+                    <table border="1" style={{ width: '100%', borderCollapse: 'collapse' }}>
+                        <thead>
+                            <tr>
+                                <th>Název</th>
+                                <th>Popis</th>
+                                <th>Datum vytvoření</th>
+                                <th>ID souboru</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {manuals.map(manual => (
+                                <tr key={manual.$id}>
+                                    <td>{manual.title}</td>
+                                    <td>{manual.description}</td>
+                                    <td>{new Date(manual.$createdAt).toLocaleString()}</td>
+                                    <td>{manual.markdownFileId}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
                 { !isLoading && manuals.length === 0 && <p>Zatím nebyly vytvořeny žádné návody.</p> }
             </section>
         </div>

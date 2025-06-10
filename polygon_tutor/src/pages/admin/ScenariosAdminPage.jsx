@@ -1,6 +1,7 @@
 // SOUBOR: src/pages/admin/ScenariosAdminPage.jsx
-// ----------------------------------------------------
-// UPRAVENÁ VERZE: Využívá centrální konfigurační soubor.
+// --------------------------------------------------------------------
+// Tato komponenta slouží k vytváření a správě výukových scénářů
+// kombinací existujících návodů a virtuálních strojů.
 
 import React, { useState, useEffect } from 'react';
 
@@ -28,6 +29,7 @@ const ScenariosAdminPage = () => {
     const fetchAllData = async () => {
         setIsLoading(true);
         try {
+            // Použijeme Promise.all pro paralelní načtení všech potřebných dat
             const [scenariosResponse, manualsResponse, vmsResponse] = await Promise.all([
                 databases.listDocuments(AppwriteConfig.DATABASE_ID, AppwriteConfig.SCENARIOS_COLLECTION_ID, [Query.orderDesc('$createdAt')]),
                 databases.listDocuments(AppwriteConfig.DATABASE_ID, AppwriteConfig.MANUALS_COLLECTION_ID, [Query.limit(100)]),
@@ -43,12 +45,13 @@ const ScenariosAdminPage = () => {
         setIsLoading(false);
     };
     
-    // Handler pro výběr více VM
+    // Handler pro výběr více VM v select boxu
     const handleVmSelection = (e) => {
         const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
         setSelectedVmIds(selectedOptions);
     };
 
+    // Handler pro odeslání formuláře
     const handleCreateScenario = async (e) => {
         e.preventDefault();
         if (!newScenarioName || !selectedManualId || selectedVmIds.length === 0) {
@@ -65,11 +68,12 @@ const ScenariosAdminPage = () => {
                     name: newScenarioName,
                     description: newScenarioDesc,
                     manualId: selectedManualId,
-                    requiredVmIds: selectedVmIds
+                    requiredVmIds: selectedVmIds // Uložíme pole IDček
                 }
             );
 
             alert('Scénář byl úspěšně vytvořen!');
+            // Reset formuláře a znovu načtení dat
             setNewScenarioName('');
             setNewScenarioDesc('');
             setSelectedManualId('');
@@ -78,7 +82,7 @@ const ScenariosAdminPage = () => {
 
         } catch (error) {
             console.error("Chyba při vytváření scénáře:", error);
-            alert('Vytvoření scénáře selhalo.');
+            alert(`Vytvoření scénáře selhalo: ${error.message}`);
         }
     };
 

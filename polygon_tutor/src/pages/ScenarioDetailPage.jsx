@@ -1,4 +1,4 @@
-// SOUBOR: src/pages/ScenarioDetailPage.jsx (Diagnostická verze)
+// SOUBOR: src/pages/ScenarioDetailPage.jsx
 // ----------------------------------------------------------------
 // OPRAVA: Místo storage.getFileView() používáme storage.getFileDownload()
 // pro získání syrového obsahu souboru.
@@ -105,9 +105,7 @@ const ScenarioDetailPage = () => {
             </aside>
             <main style={{ width: '70%', borderLeft: '1px solid #ccc', paddingLeft: '2em' }}>
                 <h2>Návod</h2>
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {manualContent}
-                </ReactMarkdown>
+                <pre>{manualContent}</pre>
             </main>
         </div>
     );
