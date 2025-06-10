@@ -3,7 +3,8 @@
 // Tento soubor inicializuje klienta Appwrite a exportuje všechny potřebné služby,
 // které budeme v aplikaci používat.
 
-import { Client, Account, Databases, Storage} from 'appwrite';
+
+import { Client, Account, Databases, Storage, ID, Query } from 'appwrite'; // <-- PŘIDÁNO 'Query' ZDE
 
 // Vytvoření nové instance klienta
 export const client = new Client();
@@ -19,5 +20,5 @@ export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 
-// Exportujeme i ID pro generování unikátních IDček
-export { ID } from 'appwrite';
+// Exportujeme i ID a Query pro použití v jiných souborech
+export { ID, Query }; // <-- PŘIDÁNO 'Query' ZDE
