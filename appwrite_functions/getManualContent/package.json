@@ -1,0 +1,9 @@
+{
+    "name": "get-manual-content",
+    "version": "1.0.0",
+    "description": "Appwrite funkce pro bezpečné načtení obsahu návodu.",
+    "main": "index.js",
+    "dependencies": {
+      "node-appwrite": "^12.0.1"
+    }
+  }
