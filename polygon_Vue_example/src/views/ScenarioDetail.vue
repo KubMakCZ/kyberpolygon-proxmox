@@ -4,7 +4,7 @@
     <p>{{ scenar?.popis }}</p>
     <a :href="scenar?.odkaz" target="_blank" class="btn btn-outline-secondary">Otevřít v Proxmox</a>
     <hr>
-    <div v-html="markdownContent" class="mt-3"></div>
+    <div v-html="markdownContent" class="mt-3" style="text-align: left;"></div>
   </div>
 </template>
 
