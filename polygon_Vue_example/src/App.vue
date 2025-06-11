@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <router-link to="/">UŽIVATEL</router-link> |
+    <router-link to="/user">UŽIVATEL</router-link> |
     <router-link to="/admin">ADMIN</router-link>
   </nav>
   <router-view/>
