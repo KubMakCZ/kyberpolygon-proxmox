@@ -4,7 +4,7 @@
     "nazev": "Bitcoin Node",
     "popis": "Návod na instalaci Bitcoin Node.",
     "md_navod": "/00_Bitcoin_Node.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -12,23 +12,23 @@
     "nazev": "LAMP",
     "popis": "Návod na instalaci LAMP.",
     "md_navod": "/01_LAMP.md",
-    "odkaz": "#",
-    "aktivni": false
+    "odkaz": "https://172.26.37.66:8006/",
+    "aktivni": true
   },
   {
     "id": 2,
     "nazev": "WordPress",
     "popis": "Návod na instalaci WordPress.",
     "md_navod": "/02_WordPress.md",
-    "odkaz": "#",
-    "aktivni": false
+    "odkaz": "https://172.26.37.66:8006/",
+    "aktivni": true
   },
   {
     "id": 3,
     "nazev": "Nodejs",
     "popis": "Návod na instalaci Nodejs.",
     "md_navod": "/03_Nodejs.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -36,7 +36,7 @@
     "nazev": "MySQL",
     "popis": "Návod na instalaci MySQL.",
     "md_navod": "/04_MySQL.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -44,7 +44,7 @@
     "nazev": "PhpMyAdmin",
     "popis": "Návod na instalaci PhpMyAdmin.",
     "md_navod": "/05_PhpMyAdmin.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -52,7 +52,7 @@
     "nazev": "PostgreSQL",
     "popis": "Návod na instalaci PostgreSQL.",
     "md_navod": "/06_PostgreSQL.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -60,7 +60,7 @@
     "nazev": "InfluxDB",
     "popis": "Návod na instalaci InfluxDB.",
     "md_navod": "/07_InfluxDB.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -68,15 +68,15 @@
     "nazev": "PiHole",
     "popis": "Návod na instalaci PiHole.",
     "md_navod": "/08_PiHole.md",
-    "odkaz": "#",
-    "aktivni": false
+    "odkaz": "https://172.26.37.66:8006/",
+    "aktivni": true
   },
   {
     "id": 9,
     "nazev": "Apache Guacamole",
     "popis": "Návod na instalaci Apache Guacamole.",
     "md_navod": "/09_Apache_Guacamole.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -84,7 +84,7 @@
     "nazev": "Apache WebServer",
     "popis": "Návod na instalaci Apache WebServer.",
     "md_navod": "/10_Apache_WebServer.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -92,7 +92,7 @@
     "nazev": "Nginx WebServer",
     "popis": "Návod na instalaci Nginx WebServer.",
     "md_navod": "/11_Nginx_WebServer.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -100,7 +100,7 @@
     "nazev": "Nginx Proxy Manager",
     "popis": "Návod na instalaci Nginx Proxy Manager.",
     "md_navod": "/12_Nginx_Proxy_Manager.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -108,7 +108,7 @@
     "nazev": "Zabbix",
     "popis": "Návod na instalaci Zabbix.",
     "md_navod": "/13_Zabbix.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -116,7 +116,7 @@
     "nazev": "Grafana Prometheus",
     "popis": "Návod na instalaci Grafana Prometheus.",
     "md_navod": "/14_Grafana_Prometheus.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -124,7 +124,7 @@
     "nazev": "Graylog",
     "popis": "Návod na instalaci Graylog.",
     "md_navod": "/15_Graylog.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -132,7 +132,7 @@
     "nazev": "OpenVAS",
     "popis": "Návod na instalaci OpenVAS.",
     "md_navod": "/16_OpenVAS.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -140,7 +140,7 @@
     "nazev": "Gitea",
     "popis": "Návod na instalaci Gitea.",
     "md_navod": "/17_Gitea.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -148,7 +148,7 @@
     "nazev": "Jenkins",
     "popis": "Návod na instalaci Jenkins.",
     "md_navod": "/18_Jenkins.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -156,7 +156,7 @@
     "nazev": "GhostCMS",
     "popis": "Návod na instalaci GhostCMS.",
     "md_navod": "/19_GhostCMS.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -164,7 +164,7 @@
     "nazev": "MariaDB",
     "popis": "Návod na instalaci MariaDB.",
     "md_navod": "/20_MariaDB.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -172,7 +172,7 @@
     "nazev": "Drupal",
     "popis": "Návod na instalaci Drupal.",
     "md_navod": "/21_Drupal.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -180,7 +180,7 @@
     "nazev": "Joomla",
     "popis": "Návod na instalaci Joomla.",
     "md_navod": "/22_Joomla.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -188,7 +188,7 @@
     "nazev": "Cassandra",
     "popis": "Návod na instalaci Cassandra.",
     "md_navod": "/23_Cassandra.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -196,7 +196,7 @@
     "nazev": "Traefik",
     "popis": "Návod na instalaci Traefik.",
     "md_navod": "/24_Traefik.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -204,7 +204,7 @@
     "nazev": "WireGuard",
     "popis": "Návod na instalaci WireGuard.",
     "md_navod": "/25_WireGuard.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -212,7 +212,7 @@
     "nazev": "OpenVPN",
     "popis": "Návod na instalaci OpenVPN.",
     "md_navod": "/26_OpenVPN.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -220,7 +220,7 @@
     "nazev": "PiVPN",
     "popis": "Návod na instalaci PiVPN.",
     "md_navod": "/27_PiVPN.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -228,7 +228,7 @@
     "nazev": "Nextcloud",
     "popis": "Návod na instalaci Nextcloud.",
     "md_navod": "/28_Nextcloud.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -236,7 +236,7 @@
     "nazev": "Seafile",
     "popis": "Návod na instalaci Seafile.",
     "md_navod": "/29_Seafile.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -244,7 +244,7 @@
     "nazev": "AdGuard Home",
     "popis": "Návod na instalaci AdGuard Home.",
     "md_navod": "/31_AdGuard_Home.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -252,7 +252,7 @@
     "nazev": "Netdata",
     "popis": "Návod na instalaci Netdata.",
     "md_navod": "/32_Netdata.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -260,7 +260,7 @@
     "nazev": "Cockpit",
     "popis": "Návod na instalaci Cockpit.",
     "md_navod": "/33_Cockpit.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -268,7 +268,7 @@
     "nazev": "Portainer",
     "popis": "Návod na instalaci Portainer.",
     "md_navod": "/34_Portainer.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -276,7 +276,7 @@
     "nazev": "Syncthing",
     "popis": "Návod na instalaci Syncthing.",
     "md_navod": "/35_Syncthing.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -284,7 +284,7 @@
     "nazev": "DNSCrypt-Proxy",
     "popis": "Návod na instalaci DNSCrypt-Proxy.",
     "md_navod": "/36_DNSCrypt-Proxy.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -292,7 +292,7 @@
     "nazev": "Bind9",
     "popis": "Návod na instalaci Bind9.",
     "md_navod": "/37_Bind9.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -300,7 +300,7 @@
     "nazev": "Postfix Dovecot",
     "popis": "Návod na instalaci Postfix Dovecot.",
     "md_navod": "/38_Postfix_Dovecot.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -308,7 +308,7 @@
     "nazev": "Mailcow",
     "popis": "Návod na instalaci Mailcow.",
     "md_navod": "/39_Mailcow.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -316,7 +316,7 @@
     "nazev": "ZeroTier",
     "popis": "Návod na instalaci ZeroTier.",
     "md_navod": "/40_ZeroTier.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -324,7 +324,7 @@
     "nazev": "Vaultwarden",
     "popis": "Návod na instalaci Vaultwarden.",
     "md_navod": "/41_Vaultwarden.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -332,7 +332,7 @@
     "nazev": "Glances",
     "popis": "Návod na instalaci Glances.",
     "md_navod": "/42_Glances.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -340,7 +340,7 @@
     "nazev": "Homebox",
     "popis": "Návod na instalaci Homebox.",
     "md_navod": "/43_Homebox.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   },
   {
@@ -348,7 +348,7 @@
     "nazev": "Filebrowser",
     "popis": "Návod na instalaci Filebrowser.",
     "md_navod": "/44_Filebrowser.md",
-    "odkaz": "#",
+    "odkaz": "https://172.26.37.66:8006/",
     "aktivni": false
   }
 ]
