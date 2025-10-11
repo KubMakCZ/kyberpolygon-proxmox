@@ -29,8 +29,13 @@ export const AuthProvider = ({ children }) => {
     const checkUserStatus = async () => {
         try {
             const currentUser = await account.get();
+            console.log('🔐 AuthContext: Načten uživatel:', currentUser);
+            console.log('   User ID:', currentUser.$id);
+            console.log('   Email:', currentUser.email);
+            console.log('   Name:', currentUser.name);
             setUser(currentUser);
         } catch (error) {
+            console.log('❌ AuthContext: Uživatel není přihlášen');
             setUser(null); // Pokud nastane chyba (např. 401), uživatel není přihlášen
         }
         setLoading(false);
@@ -43,8 +48,22 @@ export const AuthProvider = ({ children }) => {
     const loginUser = async (userInfo) => {
         setLoading(true);
         try {
+            // Nejdřív zkontroluj, jestli už není aktivní session
+            try {
+                const existingUser = await account.get();
+                if (existingUser) {
+                    console.log('⚠️ Už je aktivní session, odhlašuji...');
+                    await account.deleteSession('current');
+                }
+            } catch (error) {
+                // Žádná aktivní session - to je OK
+                console.log('✅ Žádná aktivní session');
+            }
+
+            // Teď vytvoř novou session
             await account.createEmailPasswordSession(userInfo.email, userInfo.password);
             const currentUser = await account.get();
+            console.log('✅ Uživatel úspěšně přihlášen:', currentUser.email);
             setUser(currentUser);
             navigate('/'); // Přesměrování na domovskou stránku
         } catch (error) {

@@ -44,21 +44,19 @@ const ManualsAdminPage = () => {
             return;
         }
 
-        // Připravíme si pole oprávnění pro nový soubor.
-        const filePermissions = [
-            Permission.read(Role.team(AppwriteConfig.STUDENTS_TEAM_ID)),
-            Permission.read(Role.team(AppwriteConfig.ADMINS_TEAM_ID)),
-            Permission.update(Role.team(AppwriteConfig.ADMINS_TEAM_ID)),
-            Permission.delete(Role.team(AppwriteConfig.ADMINS_TEAM_ID)),
-        ];
-
         try {
+            console.log('📤 Nahrávám soubor do bucketu:', AppwriteConfig.MANUALS_BUCKET_ID);
+
+            // Nahrajeme soubor BEZ oprávnění - bucket má File Security = enabled,
+            // takže automaticky přiřadí oprávnění aktuálnímu uživateli
             const fileResponse = await storage.createFile(
                 AppwriteConfig.MANUALS_BUCKET_ID,
                 ID.unique(),
-                newManualFile,
-                filePermissions
+                newManualFile
+                // žádné permissions - nechej Appwrite přiřadit automaticky
             );
+
+            console.log('✅ Soubor nahrán:', fileResponse);
             const fileId = fileResponse.$id;
 
             await databases.createDocument(
